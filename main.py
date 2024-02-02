@@ -5,3 +5,5 @@ def check_fun():
     return True
   else:
     return False
+
+test = check_fun()
