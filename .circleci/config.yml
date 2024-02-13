@@ -1,30 +1,43 @@
+# Couldn't automatically generate a config from your source code.
+# This is a generic template to serve as a base for your custom config
+# See: https://circleci.com/docs/configuration-reference
 version: 2.1
-
 jobs:
-  build:
+  test:
     docker:
-      - image: python:3.8
-
-    working_directory: /app
-
+      - image: cimg/base:stable
     steps:
       - checkout
-
-      # Installez les dépendances du projet
-      - run:
-          name: Install dependencies
-          command: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
-
-      # Exécutez les tests
+      # Replace this with a real test runner invocation
       - run:
           name: Run tests
-          command: |
-            python -m pytest
-
-workflows:
-  version: 2
+          command: echo 'replace me with real tests!' && false
   build:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      # Replace this with steps to build a package, or executable
+      - run:
+          name: Build an artifact
+          command: touch example.txt
+      - store_artifacts:
+          path: example.txt
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      # Replace this with steps to deploy to users
+      - run:
+          name: deploy
+          command: '#e.g. ./deploy.sh'
+workflows:
+  example:
     jobs:
-      - build
+      - test
+      - build:
+          requires:
+            - test
+      - deploy:
+          requires:
+            - test
